@@ -1,8 +1,6 @@
 # starsparrow
 # adventofcode puzzle 6-1
 
-import re
-
 # Read in the text file of lighting commands from Santa
 with open('input.txt', 'r') as f:
     while True:
