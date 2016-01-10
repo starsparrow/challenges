@@ -37,27 +37,27 @@ def getsignal(source):
 
 # Direct signal input    
 def opdirect(signal, dest):
-    wires[dest] += signal
+    wires[dest] = signal
 
 # NOT operation        
 def opnot(signal, dest):
-    pass
+    wires[dest] = ~ signal
 
 # AND operation    
 def opand(signal1, signal2, dest):
-    wires[dest] += signal1 & signal2
+    wires[dest] = signal1 & signal2
 
 # OR operation    
 def opor(signal1, signal2, dest):
-    pass
+    wires[dest] = signal1 | signal2
 
 # LSHIFT operation    
 def oplshift(signal1, signal2, dest):
-    pass
+    wires[dest] = signal1 << signal2
 
 # RSHIFT operation    
 def oprshift(signal1, signal2, dest):
-    pass
+    wires[dest] += signal1 >> signal2
 
 # Determine what operation to do for each command
 
@@ -85,8 +85,6 @@ for command in commands:
             oplshift(signal1, signal2, dest)
         elif operation == 'RSHIFT':
             oprshift(signal1, signal2, dest)
-        
-print(wires['a'])
-        
-    
-        
+
+for wire in sorted(wires):
+	print('%s : %s' % (wire, wires[wire]))     
