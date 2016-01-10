@@ -45,7 +45,7 @@ def opnot(signal, dest):
 
 # AND operation    
 def opand(signal1, signal2, dest):
-    pass
+    wires[dest] += signal1 & signal2
 
 # OR operation    
 def opor(signal1, signal2, dest):
