@@ -33,6 +33,6 @@ def get_value(key):
     else:
         return get_value(cmd[0])
 
-data["a"] = str(get_value("a"))
+data["b"] = str(get_value("a"))
 get_value.cache_clear()
 print(get_value("a"))
