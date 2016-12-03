@@ -28,13 +28,11 @@ for queue in [staging_a, staging_b, staging_c]:
 		if ((queue[0] + queue[1] > queue[2]) and
 			(queue[1] + queue[2] > queue[0]) and
 			(queue[0] + queue[2] > queue[1])):
-				valid_triangles.append([queue[0],
+				valid_triangles.append([
+					queue[0],
 					queue[1],
-					queue[2]])
-		else:
-			invalid_triangles.append([queue[0],
-					queue[1],
-					queue[2]])
+					queue[2]
+				])
 		for _ in range(0,3):
 			queue.remove(queue[0])
 
