@@ -12,7 +12,6 @@ staging_b = []
 staging_c = []
 
 valid_triangles = []
-invalid_triangles = []
 
 for row in rows:
 	sides = row.split(" ")
@@ -24,20 +23,19 @@ for row in rows:
 	staging_b.append(sides[1])
 	staging_c.append(sides[2])
 
-while len(staging_a) > 0:
-	if ((staging_a[0] + staging_a[1] > staging_a[2]) and
-		(staging_a[1] + staging_a[2] > staging_a[0]) and
-		(staging_a[0] + staging_a[2] > staging_a[1])):
-			valid_triangles.append([staging_a[0],
-				staging_a[1],
-				staging_a[2]])
-	else:
-		invalid_triangles.append([staging_a[0],
-				staging_a[1],
-				staging_a[2]])
-	staging_a.remove(staging_a[0])
-	staging_a.remove(staging_a[0])
-	staging_a.remove(staging_a[0])
+for queue in [staging_a, staging_b, staging_c]:
+	while len(queue) > 0:
+		if ((queue[0] + queue[1] > queue[2]) and
+			(queue[1] + queue[2] > queue[0]) and
+			(queue[0] + queue[2] > queue[1])):
+				valid_triangles.append([queue[0],
+					queue[1],
+					queue[2]])
+		else:
+			invalid_triangles.append([queue[0],
+					queue[1],
+					queue[2]])
+		for _ in range(0,3):
+			queue.remove(queue[0])
 
 print(len(valid_triangles))
-	
