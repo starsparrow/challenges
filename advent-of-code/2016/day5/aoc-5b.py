@@ -24,9 +24,9 @@ while hashindex < 5000000:
 	hashinput = bytes(code, 'utf-8')
 	md5hash = hashlib.md5(hashinput).hexdigest()
 	if (md5hash[0:5] == '00000'):
-		if (md5hash[5:6] in [0,1,2,3,4,5,6,7] and 
-			password[md5hash[5:6]] == ""):
-				password[md5hash[5:6]] = md5hash[6:7]
+		if (md5hash[5:6] in ['0', '1', '2', '3', '4', '5', '6', '7'] and 
+			password[int(md5hash[5:6])] == ""):
+				password[int(md5hash[5:6])] = md5hash[6:7]
 	hashindex += 1
 
 print(password)
