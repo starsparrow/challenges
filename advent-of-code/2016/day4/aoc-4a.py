@@ -3,6 +3,8 @@
 # Advent of Code 2016 - Day 4: Security Through Obscurity - Puzzle A
 # starsparrow
 
+import collections
+
 # Read in our room data
 f = open('input', 'r')
 data = [line.strip() for line in f.readlines()]
@@ -18,14 +20,19 @@ for line in [line.split('-') for line in data]:
     rooms[name] = {'sectorid': sectorid, 'hash': roomhash}
 
 def is_real_room(roomname, roomhash):
-    return(list(roomname))
-    
-    
+    frequency = {}
+    for letter in list(roomname):
+        if letter not in frequency:
+            frequency[letter] = 1
+        else:
+            frequency[letter] += 1
+    print(frequency)
+
 # Main section
 #for room in rooms:
 #print("{} {} {}".format(room,
 #                            rooms[room]['sectorid'],
 #                            rooms[room]['hash']))
 
-print(is_real_room('balsjrpaowijfeasledjfopawiejfasdf', 'asdf'))
+print(is_real_room('aaaabbnnmmiqweryp', 'asdf'))
     
