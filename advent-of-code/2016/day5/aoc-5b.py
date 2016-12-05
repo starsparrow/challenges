@@ -19,13 +19,13 @@ password = {
 }
 
 hashindex = 0
-while "" in password.values():
+while hashindex < 10000000:
 	code = "{}{}".format(input, hashindex)
 	hashinput = bytes(code, 'utf-8')
 	md5hash = hashlib.md5(hashinput).hexdigest()
-	if (md5hash[0:5] == '00000' and
-		md5hash[5:6] in range(0,8) and 
-		password[md5hash[5:6]] != ""):
-			password[md5hash[5:6]] = md5hash[6:7]
-			print(password)
+	if (md5hash[0:5] == '00000'):
+		if (int(md5hash[5:6]) in range(0,8) and 
+			password[md5hash[5:6]] != ""):
+				password[md5hash[5:6]] = md5hash[6:7]
+				print(password)
 	hashindex += 1
