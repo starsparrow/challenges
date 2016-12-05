@@ -3,11 +3,13 @@
 # Advent of Code 2016 - Day 5: How About a Nice Game of Chess? - Puzzle A
 # starsparrow
 
-import hashlib
+import hashlib, time
 
 input = 'ugkcyxxp'
 
 password = []
+
+start_time = time.time()
 
 hashindex = 0
 while len(password) < 8:
@@ -19,3 +21,4 @@ while len(password) < 8:
 	hashindex += 1
 
 print("".join(password))
+print("--- Found answer in {} seconds ---".format(time.time() - start_time))
