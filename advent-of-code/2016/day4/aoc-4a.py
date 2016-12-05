@@ -3,8 +3,6 @@
 # Advent of Code 2016 - Day 4: Security Through Obscurity - Puzzle A
 # starsparrow
 
-import collections
-
 # Read in our room data
 f = open('input', 'r')
 data = [line.strip() for line in f.readlines()]
