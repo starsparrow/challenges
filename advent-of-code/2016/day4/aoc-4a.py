@@ -20,19 +20,35 @@ for line in [line.split('-') for line in data]:
     rooms[name] = {'sectorid': sectorid, 'hash': roomhash}
 
 def is_real_room(roomname, roomhash):
+    '''Calculate roomname hash, compare to provided hash, return true/false'''
     frequency = {}
     for letter in list(roomname):
         if letter not in frequency:
             frequency[letter] = 1
         else:
             frequency[letter] += 1
-    print(frequency)
+    highest_freq = sorted(frequency.values(), reverse=True)[0]
+
+    reverselookup = {}
+    for number in range(highest_freq, 0, -1):
+       reverselookup[number] = []
+    for letter in frequency:
+        reverselookup[frequency[letter]].append(letter)
+
+    mostcommon = []
+    longhash = []
+    for number in range(highest_freq, 0, -1):
+        mostcommon.append(sorted(reverselookup[number]))
+    mostcommon = [item for item in mostcommon if len(item) > 0] # Remove empties
+    for item in mostcommon:
+        longhash += item
+
+    return roomhash == "".join(longhash)[:5]
 
 # Main section
-#for room in rooms:
-#print("{} {} {}".format(room,
-#                            rooms[room]['sectorid'],
-#                            rooms[room]['hash']))
+sectorids = []
+for room in rooms:
+    if is_real_room(room, rooms[room]['hash']):
+        sectorids.append(int(rooms[room]['sectorid']))
 
-print(is_real_room('aaaabbnnmmiqweryp', 'asdf'))
-    
+print(sum(sectorids))
