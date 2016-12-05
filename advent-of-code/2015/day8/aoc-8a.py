@@ -24,9 +24,9 @@ code_charcount = 0
 mem_charcount = 0
 
 for string in strings:
-	code_charcount += len(list(string))
+	code_charcount += len(list(string.rstrip('\n')))
 	mem_charcount += len(list(clean(string)))
-	print(clean(string))
+	print(string)
 
 print("Code character count: {}\n\
 Memory character count: {}\n\
