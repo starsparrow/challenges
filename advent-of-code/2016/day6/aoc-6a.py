@@ -5,7 +5,7 @@
 
 f = open('input', 'r')
 signal = [line.strip() for line in f.readlines()]
-f.close
+f.close()
 
 def most_common(list):
 	'''Return the most common letter in a list of letters'''
