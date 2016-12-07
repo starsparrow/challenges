@@ -39,8 +39,8 @@ def parse_address(addr):
 		else:
 			m = re.search('\[[a-z]+\]', address)
 			hyper_seqs.append(m.group(0))
-		address = list(address)
 		
+		address = list(address)
 		for n in range(0, len(m.group(0))):
 			address.remove(address[0])
 		address = "".join(address)
