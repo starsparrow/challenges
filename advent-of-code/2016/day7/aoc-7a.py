@@ -3,6 +3,8 @@
 # Advent of Code 2016 - Day 7: Signals and Noise - Puzzle A
 # starsparrow
 
+import re
+
 f = open('input', 'r')
 input = [line.strip() for line in f.readlines()]
 f.close()
@@ -26,35 +28,37 @@ def detect_abba(addr_part):
 
 def parse_address(addr):
 	"""Get normal and hypernet sequences and return them in a dict."""
-	charlist = list(addr)
-	norm_seq = []
-	hyper_seq_builder = []
+	address = addr
+	norm_seqs = []
 	hyper_seqs = []
-	
-	while len(charlist) > 0:
-		if charlist[0] == ']': # Process the hypersequence list when completed
-			charlist.remove(charlist[0])
-			hyper_seqs.append("".join(hyper_seq_builder))
-			hyper_seq_builder = []
-		elif charlist[0] != '[': # Normal sequence
-			norm_seq.append(charlist[0])
-			charlist.remove(charlist[0])
-		else: # Hypernet sequence encountered!
-			charlist.remove(charlist[0]) # Discard the [ character
-			while charlist[0] != ']':
-				hyper_seq_builder.append(charlist[0])
-				charlist.remove(charlist[0])
 
-	return {'norm_seq': "".join(norm_seq), 'hyper_seqs': hyper_seqs}
+	while len(list(address)) > 0:
+		if list(address)[0] != '[':
+			m = re.search('^[a-z]+', address)
+			norm_seqs.append(m.group(0))
+		else:
+			m = re.search('\[[a-z]+\]', address)
+			hyper_seqs.append(m.group(0))
+		address = list(address)
+		
+		for n in range(0, len(m.group(0))):
+			address.remove(address[0])
+		address = "".join(address)
+
+	return {'norm_seqs': norm_seqs, 'hyper_seqs': hyper_seqs}
 
 
 def supports_tls(addr):
+	"""Make sure the hypernets don't have any ABBAs, and at least one ABBA can
+	be found in the normal address sequences. Return True if so.
+	"""
 	address_parts = parse_address(addr)
 	for seq in address_parts['hyper_seqs']:
 		if detect_abba(seq):
 			return False
-	if detect_abba(address_parts['norm_seq']):
-		return True
+	for seq in address_parts['norm_seqs']:
+		if detect_abba(seq):
+			return True
 
 
 def main():
@@ -62,8 +66,7 @@ def main():
 	for address in input:
 		if supports_tls(address):
 			tls_addresses.append(address)
-			print("{}\t{}".format(address, supports_tls(address)))
-	print(len(tls_addresses))
+	print('{} addresses support TLS.'.format(len(tls_addresses)))
 
 
 # Main section
