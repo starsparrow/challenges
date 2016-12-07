@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-# Advent of Code 2016 - Day 7: Signals and Noise - Puzzle A
+# Advent of Code 2016 - Day 7: Internet Protocol Version 7 - Puzzle A
 # starsparrow
 
 import re
