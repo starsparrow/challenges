@@ -131,3 +131,4 @@ with open('input.txt', 'r') as f:
         datum.rstrip()).supports_tls()]))
     print(len([datum.rstrip() for datum in data if Address(
         datum.rstrip()).supports_ssl()]))
+    
