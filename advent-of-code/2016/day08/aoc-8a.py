@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-# Advent of Code 2016 - Day 8: Two-Factor Authentication - Puzzle A
+# Advent of Code 2016 - Day 8: Two-Factor Authentication
 # starsparrow
 
 
@@ -65,17 +65,28 @@ class Display:
 			for y in range(0, self.resolution[1]))
 
 
+# Helper functions
+
+def parse_instruction(instruction, display):
+	if instruction.find('rect') == 0:
+		dimensions = instruction.split(' ')[1].partition('x')
+		display.rect(int(dimensions[0]), int(dimensions[2]))
+	else:
+		params = instruction.partition('=')[2].split()
+		func = display.rotate_column if instruction.find('x') > 0 else display.rotate_row
+		for n in range(int(params[2])):
+			func(int(params[0]))
+
+
 # Main section
 
-f = open('input', 'r')
-instructions = [line.strip() for line in f.readlines()]
-f.close()
+screen1 = Display((50,6))
 
-screen = Display((50,6))
-screen.rect(4,2)
-for n in range(11):
-	screen.rotate_column(0)
-for n in range(5):
-	screen.rotate_row(5)
-print('\n')
-print(screen.show())
+with open('input', 'r') as f:
+	instructions = [line.strip() for line in f.readlines()]
+
+for instruction in instructions:
+	parse_instruction(instruction, screen1)
+
+print(len([pixel for pixel in screen1.pixels if screen1.pixels[pixel] == '#']))  # Puzzle A
+print(screen1.show())  # Puzzle B
