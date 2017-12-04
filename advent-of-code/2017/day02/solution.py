@@ -2,7 +2,7 @@
 
 from sys import argv
 
-with open('input', 'r') as input_file:
+with open(argv[1], 'r') as input_file:
     data = [line.strip() for line in input_file.readlines()]
     # Make each line (which is a tab-separated string in a list) its own list of integers
     del(data[-1])
