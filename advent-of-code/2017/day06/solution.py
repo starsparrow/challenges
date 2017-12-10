@@ -34,7 +34,8 @@ def main():
     while memory_banks not in history:
         history.append(memory_banks[:])
         memory_banks = redistribute_blocks(memory_banks)
-    print(len(history))
+    print('Duplicate found after {} redistributions'.format(len(history)))
+    print('{} redistributions since first occurrence'.format(len(history) - history.index(memory_banks)))
 
 
 if __name__ == "__main__":
